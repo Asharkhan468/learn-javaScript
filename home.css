@@ -1,0 +1,91 @@
+body {
+
+     font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.transaction-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.expense-name {
+    font-size: 16px;
+    color: #555;
+}
+
+.expense-amount {
+    font-size: 16px;
+    color: #ff6b6b;
+}
+
+
+
+
+
+
+
+
+
+.balance-container {
+    text-align: center;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.balance-title {
+    font-size: 24px;
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.balance-amount {
+    font-size: 48px;
+    margin: 10px 0 0;
+    font-weight: 700;
+    color: #ffeb3b;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+input{
+    padding: 10px;
+    width: 16rem;
+}
