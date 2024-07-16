@@ -1,54 +1,84 @@
 let data = JSON.parse(localStorage.getItem('data'));
 
-console.log(data);
-
-const div = document.querySelector("#div");
-const para = document.querySelector("#para");
-const totalExpense = document.querySelector("#total-expense");
-
-const list = document.querySelector(".transaction-list");
 const expense = document.querySelector("#expense");
 const description = document.querySelector("#description");
 
-let balance = data
+//Render user Balance
+
+const div = document.querySelector("#div");
+
+div.innerHTML+=`$${data}`;
 
 
-div.innerHTML += '$'+`${data}`;
-
-para.innerHTML ="$"+`${data}`;
-
-const addBtn = document.querySelector("#Add-btn");
-
-addBtn.addEventListener('click' , ()=>{
-    list.innerHTML += `
-     <li class="transaction">
-  <span class="expense-name">${description.value}</span>
-                <span class="expense-amount text-danger"> $${expense.value} </span>
-                <span><i class="fa-solid fa-xmark"></i></span>
-</li>
-    `;
-
-    let expenseValue = parseInt(expense.value);
-
-   balance -= expenseValue
-
-   console.log(balance);
-
-   localStorage.setItem("currentBalance" , balance);
-
-   let currentBalance = JSON.parse(localStorage.getItem("currentBalance"));
-
-   document.addEventListener("DOMContentLoaded", () => {
-     
-   });
+//Render user Income
 
 
-    expense.value=""
-    description.value=""
+const userIncome = document.querySelector("#user-income");
+
+userIncome.innerHTML=`$${data}`
 
 
+
+//Render Expense Details
+
+
+const list = document.querySelector(".transaction-list");
+
+const addBtn = document.querySelector("#Add-btn").addEventListener("click" , ()=>{
+    list.innerHTML += `<li class="transaction">
+    <span class="expense-name">${description.value} </span>
+    <span class="expense-amount"> ${expense.value}</span>
+    <span class="fa-solid fa-xmark"></span>
+    </li>`;
+    
+        
+
+
+  //Render user expense
+
+  const userExpense = document.querySelector("#total-expense");
+
+  let value = expense.value;
+
+  parseInt(value);
+
+  value+=expense.value;
+
+  
+
+  userExpense.innerHTML=`${value}`
+
+
+  
+   description.value = "";
+   expense.value = "";
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
