@@ -1,13 +1,12 @@
-let data = JSON.parse(localStorage.getItem('data'));
+//Get data from the local storage
 
-const expense = document.querySelector("#expense");
-const description = document.querySelector("#description");
+let data = JSON.parse(localStorage.getItem("data"));
 
-//Render user Balance
+//Render user balance
 
-const div = document.querySelector("#div");
+const balance = document.querySelector("#balance");
 
-div.innerHTML+=`$${data}`;
+balance.innerHTML=`$${data}`
 
 
 //Render user Income
@@ -18,66 +17,62 @@ const userIncome = document.querySelector("#user-income");
 userIncome.innerHTML=`$${data}`
 
 
+//Render user expense
 
-//Render Expense Details
+const transactionList = document.querySelector(".transaction-list");
+
+const expense = document.querySelector("#expense");
+const description = document.querySelector("#description");
+
+let transactionArr=[];
+
+let obj={};
+
+const AddBtn = document.querySelector("#Add-btn");
 
 
-const list = document.querySelector(".transaction-list");
+AddBtn.addEventListener('click' , ()=>{
 
-const addBtn = document.querySelector("#Add-btn").addEventListener("click" , ()=>{
-    list.innerHTML += `<li class="transaction">
-    <span class="expense-name">${description.value} </span>
-    <span class="expense-amount"> ${expense.value}</span>
-    <span class="fa-solid fa-xmark"></span>
+  obj={
+    expense:description.value,
+    amount:expense.value
+  }
+
+  transactionArr.push(obj);
+
+
+ 
+   transactionList.innerHTML = "";
+
+   for (let i = 0; i < transactionArr.length; i++) {
+     transactionList.innerHTML += `<li class="transaction">
+    <span class="expense-name">${transactionArr[i].expense} </span>
+    <span class="expense-amount"> ${transactionArr[i].amount}</span>
+    <i onclick="deletelist(${i})" class="fa-solid fa-xmark"></i>
     </li>`;
-    
-        
-
-
-  //Render user expense
-
-  const userExpense = document.querySelector("#total-expense");
-
-  let value = expense.value;
-
-  parseInt(value);
-
-  value+=expense.value;
+   }
+ 
+  description.value=""
+  expense.value=""
 
   
-
-  userExpense.innerHTML=`${value}`
-
-
-  
-   description.value = "";
-   expense.value = "";
-
 })
 
 
 
+function deletelist(index){
+  transactionArr.splice(index,1)
 
+  transactionList.innerHTML = "";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  for (let i = 0; i < transactionArr.length; i++) {
+    transactionList.innerHTML += `<li class="transaction">
+    <span class="expense-name">${transactionArr[i].expense} </span>
+    <span class="expense-amount"> ${transactionArr[i].amount}</span>
+    <i onclick="deletelist(${i})" class="fa-solid fa-xmark"></i>
+    </li>`;
+  }
+}
 
 
 
