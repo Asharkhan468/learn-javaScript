@@ -1,79 +1,139 @@
-//Get data from the local storage
+//Get data from local storage
 
 let data = JSON.parse(localStorage.getItem("data"));
 
+let transactionArr = JSON.parse(localStorage.getItem('arr')) || [];
+
+
 //Render user balance
 
-const balance = document.querySelector("#balance");
+let balance = document.querySelector("#balance");
 
 balance.innerHTML=`$${data}`
 
 
-//Render user Income
+//Render User Income
 
-
-const userIncome = document.querySelector("#user-income");
+let userIncome = document.querySelector("#user-income");
 
 userIncome.innerHTML=`$${data}`
 
 
-//Render user expense
+//Render Expense Details
 
-const transactionList = document.querySelector(".transaction-list");
+let expense = document.querySelector('#expense');
+let description = document.querySelector("#description");
 
-const expense = document.querySelector("#expense");
-const description = document.querySelector("#description");
-
-let transactionArr=[];
-
-let obj={};
-
-const AddBtn = document.querySelector("#Add-btn");
-
-
-AddBtn.addEventListener('click' , ()=>{
-
-  obj={
-    expense:description.value,
-    amount:expense.value
-  }
-
-  transactionArr.push(obj);
-
-
- 
-   transactionList.innerHTML = "";
-
-   for (let i = 0; i < transactionArr.length; i++) {
-     transactionList.innerHTML += `<li class="transaction">
-    <span class="expense-name">${transactionArr[i].expense} </span>
-    <span class="expense-amount"> ${transactionArr[i].amount}</span>
-    <i onclick="deletelist(${i})" class="fa-solid fa-xmark"></i>
-    </li>`;
-   }
- 
-  description.value=""
-  expense.value=""
-
-  
-})
+let transactionList = document.querySelector(".transaction-list");
 
 
 
-function deletelist(index){
-  transactionArr.splice(index,1)
 
+function renderList(){
   transactionList.innerHTML = "";
-
   for (let i = 0; i < transactionArr.length; i++) {
-    transactionList.innerHTML += `<li class="transaction">
-    <span class="expense-name">${transactionArr[i].expense} </span>
-    <span class="expense-amount"> ${transactionArr[i].amount}</span>
-    <i onclick="deletelist(${i})" class="fa-solid fa-xmark"></i>
-    </li>`;
+    transactionList.innerHTML += `
+      <li class="transaction">
+        <span class="expense-name">${transactionArr[i].expense} </span>
+        <span class="expense-amount">$${transactionArr[i].amount}</span>
+        <i class="fa-solid fa-xmark" onclick="deleteList(${i})"></i>
+      </li>
+    `;
   }
+
+ 
+
+
 }
 
+renderList();
+
+
+//  totalExpense();
+
+
+let div = document.querySelector("#div")
+
+
+
+function myFunct(){
+
+
+  if(expense.value=="" && description.value==""){
+
+    alert("Please fill the details..")
+
+
+  }else{
+    let obj = {
+      expense: description.value,
+      amount: parseInt(expense.value),
+    };
+
+    transactionArr.push(obj);
+
+    description.value = "";
+    expense.value = "";
+
+    localStorage.setItem("arr", JSON.stringify(transactionArr));
+
+    renderList();
+
+    location.reload();
+  }
+
+  }
+
+
+
+  
+
+
+  function deleteList(index) {
+    transactionArr.splice(index, 1);
+    localStorage.setItem("arr", JSON.stringify(transactionArr));
+    location.reload()
+    renderList();
+    
+  }
+
+
+
+  //Render user Expense
+
+
+
+  let total = 0;
+
+let userExpense = document.querySelector("#total-expense");
+
+  function totalExpense(){
+    for(let j = 0; j < transactionArr.length; j++){ 
+      total += transactionArr[j].amount;
+      }
+
+      renderList()
+
+      userExpense.innerHTML+=`$${total}`
+
+      
+  }
+
+
+  totalExpense()
+
+
+
+
+  
+
+
+
+
+
+
+
+  
 
 
 
